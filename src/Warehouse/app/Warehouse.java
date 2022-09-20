@@ -3,22 +3,23 @@ package Warehouse.app;
 import java.util.ArrayList;
 
 public class Warehouse {
-    private static final int capacity = 2;
-    private final ArrayList<Rack> racks = new ArrayList<>(capacity);
-    private int racksCounter=0;
+    private static final int capacity = 10;
+    private final ArrayList<Delivery> deliveries;
 
-    public void addRacks (Rack rack){
-        racks.add(racksCounter, rack);
-        racksCounter++;
+    public Warehouse(Delivery delivery) {
+        this.deliveries = new ArrayList<>(this.capacity);
     }
-    public ArrayList<Rack> getRacks() {
-        return racks;
+
+
+    public ArrayList<Delivery> getDeliveries() {
+        return deliveries;
     }
+
 
     @Override
     public String toString() {
         return "Warehouse{" +
-                "racks=" + racks +
+                "deliveries=" + deliveries +
                 '}';
     }
 }

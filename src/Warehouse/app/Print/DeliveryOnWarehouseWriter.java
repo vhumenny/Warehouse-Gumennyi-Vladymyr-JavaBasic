@@ -1,12 +1,11 @@
 package Warehouse.app.Print;
 
 import Warehouse.app.Delivery;
-import Warehouse.app.Rack;
 import Warehouse.app.Warehouse;
 
-public interface DeliveryOnRackWriter {
+public interface DeliveryOnWarehouseWriter {
 
-void printDeliveryInfo(Rack rack);
+void printDeliveryInfo(Delivery delivery);
 
 void printWarehouseInfo(Warehouse warehouse);
 }

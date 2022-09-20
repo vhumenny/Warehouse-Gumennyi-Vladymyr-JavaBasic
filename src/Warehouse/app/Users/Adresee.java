@@ -18,6 +18,10 @@ public class Adresee extends Person {
     public String toString() {
         return "Adresee{" +
                 "deliveryAdress='" + deliveryAdress + '\'' +
+                "fName='" + getfName() + '\'' +
+                ", mName='" + getmName() + '\'' +
+                ", lName='" + getlName() + '\'' +
+                ", telephone=" + getTelephone() +
                 '}';
     }
 }
