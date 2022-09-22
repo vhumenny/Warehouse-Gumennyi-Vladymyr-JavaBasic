@@ -2,17 +2,17 @@ package Warehouse.app;
 
 public enum DeliveryType {
 
-    GOLD(1),
-    SILVER(2),
-    REGULAR(3);
+    GOLD("Gold - 1 day to deliver"),
+    SILVER("Silver - 2 days to deliver"),
+    REGULAR("Regular - 3 days to deliver");
 
-    private final int daysToDeliver;
+    private final String daysToDeliver;
 
-    DeliveryType(int daysToDeliver) {
+    DeliveryType(String daysToDeliver) {
         this.daysToDeliver = daysToDeliver;
     }
 
-    public int getDaysToDeliver() {
+    public String getDaysToDeliver() {
         return daysToDeliver;
     }
 }

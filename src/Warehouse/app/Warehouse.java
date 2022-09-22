@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 public class Warehouse {
     private static final int capacity = 10;
-    private ArrayList<Delivery> deliveries = new ArrayList<>();
+    private final ArrayList<Delivery> deliveriesInWarehouse = new ArrayList<>(capacity);
 
-    public ArrayList<Delivery> getDeliveries() {
-        return deliveries;
+    public ArrayList<Delivery> getDeliveriesInWarehouse() {
+        return deliveriesInWarehouse;
     }
     @Override
     public String toString() {
         return "Warehouse{" +
-                "deliveries=" + deliveries +
+                "deliveries=" + deliveriesInWarehouse +
                 '}';
     }
 }

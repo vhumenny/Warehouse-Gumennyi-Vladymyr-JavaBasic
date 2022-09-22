@@ -22,40 +22,42 @@ public class Main {
 
         String command;
 
-        System.out.println("Hello, please choose a command: \nto register new delivery enter 'r' " +
-                "\nto print info about all the deliveries on warehouse enter 'p' " +
-                "\nto print info about registered delivery enter 'd' \nor to finish the program enter 'esc' : ");
+        int number=0;
 
-        registrateDelivery(scanner,random,warehouse,deliveryRegistrerInWarehouse,consolDeliveryOnWarehouse);
+        System.out.println("""
+                Hello, please choose a command:\s
+                to register new delivery enter '1'\s
+                to print info about all the deliveries on warehouse enter '2'\s
+                to print info about registered delivery enter '3'\s
+                or to finish the program enter 'esc'.""");
 
         while (true){
 
+            System.out.println("please enter command:");
             command = scanner.next();
-            giveCommand(warehouse,delivery,scanner,command,random);
+            giveCommand(warehouse,deliveryRegistrerInWarehouse,scanner,command,random,consolDeliveryOnWarehouse,number);
 
-            if(command=="esc")
-                break;
-
-
+            if(command.contains("esc")){
+                System.out.println("You chose to finish the program");
+                System.exit(1);}
         }
-
     }
-    public static void giveCommand (Warehouse warehouse, Delivery delivery,
+    public static void giveCommand (Warehouse warehouse,
                                     DeliveryRegistrerInWarehouse deliveryRegistrerInWarehouse, Scanner scanner,
-                                    String command, Random random, ConsolDeliveryOnWarehouse consolDeliveryOnWarehouse){
-
+                                    String command, Random random, ConsolDeliveryOnWarehouse consolDeliveryOnWarehouse,
+                                    int number){
         switch (command){
-            case "r":
+            case "1":
                 System.out.println("You chose to register new delivery");
-                registrateDelivery(scanner,random,warehouse,deliveryRegistrerInWarehouse, consolDeliveryOnWarehouse);
+                registrateDelivery(scanner,random,warehouse,deliveryRegistrerInWarehouse);
                 break;
-            case "p":
+            case "2":
                 System.out.println("You chose to print info about warehouse");
                 consolDeliveryOnWarehouse.printWarehouseInfo(warehouse);
                 break;
-            case "d":
-                System.out.println("You chose to print info about registered delivery");
-                consolDeliveryOnWarehouse.printDeliveryInfo(delivery);
+            case "3":
+                consolDeliveryOnWarehouse.printDeliveryInfo(warehouse,number,scanner);
+            case "esc":
                 break;
             default:
                 System.err.println("You chose the wrong option! Try again!");
@@ -65,26 +67,17 @@ public class Main {
     }
 
     private static void registrateDelivery (Scanner scanner, Random random, Warehouse warehouse,
-                                            DeliveryRegistrerInWarehouse deliveryRegistrerInWarehouse,
-                                            ConsolDeliveryOnWarehouse consolDeliveryOnWarehouse){
-        Integer deliveryId = random.nextInt(1,10000);
+                                            DeliveryRegistrerInWarehouse deliveryRegistrerInWarehouse){
+        Integer deliveryId = random.nextInt(1,100);
         String chooseDeliveryType;
         System.out.println("Please choose the delivery type, 'g' for gold, 's' for silver, 'r' for regular: ");
         chooseDeliveryType = scanner.next();
         DeliveryType deliveryType=null;
-        switch (chooseDeliveryType){
-            case "g":
-                deliveryType=DeliveryType.GOLD;
-                break;
-            case "s":
-                deliveryType=DeliveryType.SILVER;
-                break;
-            case "r":
-                deliveryType=DeliveryType.REGULAR;
-                break;
-            default:
-                System.err.println("You chose the wrong option! Try again!");
-                break;
+        switch (chooseDeliveryType) {
+            case "g" -> deliveryType = DeliveryType.GOLD;
+            case "s" -> deliveryType = DeliveryType.SILVER;
+            case "r" -> deliveryType = DeliveryType.REGULAR;
+            default -> System.err.println("You chose the wrong option! Try again!");
         }
 
         System.out.println("Please enter client fName:");
@@ -112,10 +105,11 @@ public class Main {
         Adresee adresee = new Adresee(adreseeFName,adreseeMName,adreseeLName,deliveryAdress,adreseeTelephone);
 
         Delivery delivery = new Delivery(deliveryId,deliveryType,client,adresee);
-        consolDeliveryOnWarehouse.printDeliveryInfo(delivery);
 
         System.out.println(delivery);
-        deliveryRegistrerInWarehouse.registerDeliveryinWarehouse(delivery, warehouse);
+        deliveryRegistrerInWarehouse.registerDeliveryinWarehouse(delivery,warehouse);
         System.out.println(warehouse);
     }
+
+
 }
